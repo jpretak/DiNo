@@ -6,10 +6,16 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import dino.api.BadAddressException;
+import dino.api.Directory;
+import dino.api.Notebook;
+import dino.api.NotebookAlreadyExistsException;
+import dino.api.NotebookNotFoundException;
+
 
 @ApplicationScoped
 @ManagedBean
-public class ApplicationNotebookListBean{
+public class ApplicationNotebookListBean implements Directory{
 	private List<Notebook> notebooks = new ArrayList<Notebook>();
 	private int id = 1;
 	private String ok = "OK";
@@ -28,7 +34,7 @@ public class ApplicationNotebookListBean{
 		return id;
 	}
 
-	//@Override
+	@Override
 	public List<Notebook> getAllNotebooks() {
 		// TODO Auto-generated method stub
 		List<Notebook> returnval;
@@ -36,7 +42,7 @@ public class ApplicationNotebookListBean{
 		return returnval;
 	}
 
-	//@Override
+	@Override
 	public Notebook getNotebook(String id) {
 		Notebook returnval;
 		for(Notebook notebook: notebooks)
@@ -50,7 +56,7 @@ public class ApplicationNotebookListBean{
 		return null;
 	}
 
-	//@Override
+	@Override
 	public String createNotebook(String title, String primaryUrl)
 			throws NotebookAlreadyExistsException, BadAddressException {
 		// TODO Auto-generated method stub
@@ -84,7 +90,7 @@ public class ApplicationNotebookListBean{
 		
 	}
 
-	//@Override
+	@Override
 	public void deleteNotebook(String id) throws NotebookNotFoundException {
 		// TODO Auto-generated method stub
 		for(Notebook notebook : notebooks)
